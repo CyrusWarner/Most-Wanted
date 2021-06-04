@@ -1,5 +1,7 @@
 'use strict';
 
+let filteredPeople = [""];
+
 function searchByName() {
     // Grabbing the values from our nameForm form and inputs.
     let firstNameInput = document.forms['nameForm']['fname'].value;
@@ -8,12 +10,14 @@ function searchByName() {
     correctCasing(firstNameInput, lastNameInput); // Correct casing check
 
     // "people" is coming from the data.js file. We have access to it within this JavaScript file.
-    let filteredPeople = people.filter(function (person) {
+    filteredPeople = people.filter(function (person) {
         if (person.firstName === firstNameInput && person.lastName === lastNameInput) {
             return true;
         }
         return false;
     });
+
+
 
     // Rather than console logging, you need to append the filteredPeople to a table.
     if (filteredPeople.length > 0) {
@@ -29,10 +33,30 @@ function correctCasing(firstName, lastName) {
         if (el.firstName.toLowerCase() === firstName.toLowerCase()
             && el.lastName.toLowerCase() === lastName.toLowerCase()) {
             document.getElementById("validOrNot").innerHTML = "<h1>Valid</h1>"
+            
+            //Build the table if the correct name is inputted into the form.
+            buildTable(filteredPeople, el); // Populate table
         }
         else {
             console.log("Invalid first or last name");
         }
 
     })
+}
+
+//Builds the table based off the specific person
+function buildTable(filteredPeople, el){
+    document.getElementById("mostWanted").innerHTML += `<tr>
+    <td>${el.id}</td>
+    <td>${el.firstName}</td>
+    <td>${el.lastName}</td>
+    <td>${el.gender}</td>
+    <td>${el.dob}</td>
+    <td>${el.height}</td>
+    <td>${el.weight}</td>
+    <td>${el.eyeColor}</td>
+    <td>${el.occupation}</td>
+    <td>${el.parents}</td>
+    <td>${el.currentSpouse}</td>
+    </tr>`
 }
