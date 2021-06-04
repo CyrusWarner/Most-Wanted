@@ -20,3 +20,17 @@ function searchByName(){
         console.log('Sorry, looks like there is no one with that name.');
     }
 }
+
+
+function rePrompt(){
+    people.map(function(el){
+        if(people.firstName === document.getElementById("fName").innerHTML && people.lastName === document.getElementById("lName").innerHTML){
+            alert("You found the name");
+        }
+        else{
+            alert("Invalid first or last name");
+        }
+        
+    })
+}
+ 
