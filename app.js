@@ -21,11 +21,12 @@ function searchByName(){
     }
 }
 
+// rePrompt
 
 function rePrompt(){
     people.map(function(el){
         if(people.firstName === document.getElementById("fName").innerHTML && people.lastName === document.getElementById("lName").innerHTML){
-            alert("You found the name");
+            document.getElementById("validOrNot").innerHTML += "<h1>Valid</h1>"
         }
         else{
             alert("Invalid first or last name");
