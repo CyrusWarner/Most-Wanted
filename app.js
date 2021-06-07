@@ -45,7 +45,8 @@ function correctCasing(firstName, lastName) {
 }
 
 //Builds the table based off the specific person
-function buildTable(el){
+function buildTable(){
+    people.map(function(el){
     document.getElementById("mostWanted").innerHTML += `<tr>
     <td>${el.id}</td>
     <td>${el.firstName}</td>
@@ -59,6 +60,7 @@ function buildTable(el){
     <td>${el.parents}</td>
     <td>${el.currentSpouse}</td>
     </tr>`
+})
 }
 
 let criteria;
