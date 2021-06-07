@@ -1,6 +1,6 @@
 'use strict';
 
-let filteredPeople = [""];
+let filteredPeople;
 
 function searchByName() {
     // Grabbing the values from our nameForm form and inputs.
@@ -35,7 +35,7 @@ function correctCasing(firstName, lastName) {
             document.getElementById("validOrNot").innerHTML = "<h1>Valid</h1>"
             
             //Build the table if the correct name is inputted into the form.
-            buildTable(filteredPeople, el); // Populate table
+            buildTable(el); // Populate table
         }
         else {
             console.log("Invalid first or last name");
@@ -45,7 +45,7 @@ function correctCasing(firstName, lastName) {
 }
 
 //Builds the table based off the specific person
-function buildTable(filteredPeople, el){
+function buildTable(el){
     document.getElementById("mostWanted").innerHTML += `<tr>
     <td>${el.id}</td>
     <td>${el.firstName}</td>
@@ -59,4 +59,37 @@ function buildTable(filteredPeople, el){
     <td>${el.parents}</td>
     <td>${el.currentSpouse}</td>
     </tr>`
+}
+
+let criteria;
+
+function searchBy(){
+    let genderInput = document.forms['nameForm']['gender'].value;
+    let eyeColorInput = document.forms.nameForm.eyeColor.value;   
+    let flag = false;
+    filteredGender = people.filter(function (criteria) {
+        if(genderInput.length > 0){
+            flag = true;
+        }
+        if(criteria.gender === genderInput && criteria.eyeColor === eyeColorInput && flag){
+            document.getElementById("mostWanted").innerHTML += `<tr>
+            <td>${criteria.id}</td>
+            <td>${criteria.firstName}</td>
+            <td>${criteria.lastName}</td>
+            <td>${criteria.gender}</td>
+            <td>${criteria.dob}</td>
+            <td>${criteria.height}</td>
+            <td>${criteria.weight}</td>
+            <td>${criteria.eyeColor}</td>
+            <td>${criteria.occupation}</td>
+            <td>${criteria.parents}</td>
+            <td>${criteria.currentSpouse}</td>
+            </tr>`
+        }
+        else{
+        }
+    });
+        if(filteredGender > 0){
+            console.log(filteredGender);
+        }
 }
