@@ -39,14 +39,6 @@ function searchByName() {
             </tr>`
         }
     });
-
-    // Rather than console logging, you need to append the filteredPeople to a table.
-    if (filteredPeople.length > 0) {
-        console.log(filteredPeople);
-    } else {
-        console.log('Sorry, looks like there is no one with that name.');
-    }
-
     return personObject;
 }
 
@@ -104,32 +96,13 @@ function searchBy(){
         }
 }
 
-
+let grand;
 //Search by decendants
 function searchByChildren(){
     // let currentPerson = searchByName();
-    let theFirstName = document.forms['nameForm']['fname'].value;
     let theLastName = document.forms['nameForm']['lname'].value;
-    
-    people.filter(function (person) {
-        if (person.firstName.toLowerCase() === theFirstName.toLowerCase() 
-        && person.lastName.toLowerCase() === theLastName.toLowerCase()) {
-            personObject =  
-            {
-                "id": person.id,
-                "firstName": person.firstName,
-                "lastName": person.lastName,
-                "gender": person.gender,
-                "dob": person.dob,
-                "height": person.height,
-                "weight": person.weight,
-                "eyeColor": person.eyeColor,
-                "occupation": person.occupation,
-                "parents": person.parents,
-                "currentSpouse": person.currentSpouse
-            };
-        }
-    });
+    personObject = create()
+    let tempPerson;
 
     people.map(function(el) { 
         if (theLastName === el.lastName 
@@ -148,6 +121,100 @@ function searchByChildren(){
             <td>${el.parents}</td>
             <td>${el.currentSpouse}</td>
             </tr>`
+            tempPerson = el;
+            grand = findGrandChildren(tempPerson);
+            
+        }
+        else if(grand !== undefined){
+            document.getElementById("mostWanted").innerHTML += `<tr>
+            <td>${el.id}</td>
+            <td>${el.firstName}</td>
+            <td>${el.lastName}</td>
+            <td>${el.gender}</td>
+            <td>${el.dob}</td>
+            <td>${el.height}</td>
+            <td>${el.weight}</td>
+            <td>${el.eyeColor}</td>
+            <td>${el.occupation}</td>
+            <td>${el.parents}</td>
+            <td>${el.currentSpouse}</td>
+            </tr>`
         }
     });
 }
+
+
+function searchFamily(){
+    let theLastName = document.forms['nameForm']['lname'].value;
+    personObject = create()
+    people.filter(function (person) {
+        if (person.lastName === theLastName){
+            document.getElementById("mostWanted").innerHTML += `<tr>
+            <td>${person.id}</td>
+            <td>${person.firstName}</td>
+            <td>${person.lastName}</td>
+            <td>${person.gender}</td>
+            <td>${person.dob}</td>
+            <td>${person.height}</td>
+            <td>${person.weight}</td>
+            <td>${person.eyeColor}</td>
+            <td>${person.occupation}</td>
+            <td>${person.parents}</td>
+            <td>${person.currentSpouse}</td>
+            </tr>`
+        }
+    })
+}
+
+
+function create(){
+    people.filter(function (person){
+
+    let theFirstName = document.forms['nameForm']['fname'].value;
+    let theLastName = document.forms['nameForm']['lname'].value;
+    if (person.firstName.toLowerCase() === theFirstName.toLowerCase() 
+        && person.lastName.toLowerCase() === theLastName.toLowerCase()) {
+        personObject =  {
+            "id": person.id,
+            "firstName": person.firstName,
+            "lastName": person.lastName,
+            "gender": person.gender,
+            "dob": person.dob,
+            "height": person.height,
+            "weight": person.weight,
+            "eyeColor": person.eyeColor,
+            "occupation": person.occupation,
+            "parents": person.parents,
+            "currentSpouse": person.currentSpouse
+            }
+        }
+    })
+    return personObject;
+}
+
+function findGrandChildren(el){
+    let parent = el
+    let grandChild;
+    people.filter(function (children){
+        if(children.parents[0] === parent.id || children.parents[1] === parent.id){
+            grandChild = children;
+
+
+        }
+
+    })
+    
+
+
+
+
+
+
+
+    return grandChild;
+
+
+}
+
+
+
