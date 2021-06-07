@@ -10,12 +10,25 @@
         <input type="text" id="fname" name="fname" value=""><br>
         <label for="lname">Last name:</label><br>
         <input type="text" id="lname" name="lname" value=""><br><br>
-        <input type="button" onclick="searchByName()" value="Submit">
-        
-        <div id="validOrNot">
-        <h1></h1>
-        </div> 
-
+        <label for="gender">Gender:</label><br>
+        <input type="text" id="gender" name="gender" value=""><br>
+        <label for="dob">Date Of Birth:</label><br>
+        <input type="text" id="dob" name="dob" value=""><br>
+        <label for="height">Height:</label><br>
+        <input type="text" id="height" name="height" value=""><br>
+        <label for="weight">Weight:</label><br>
+        <input type="text" id="weight" name="weight" value=""><br>
+        <label for="eyeColor">Eye Color:</label><br>
+        <input type="text" id="eyeColor" name="eyeColor" value=""><br>
+        <label for="occupation">Occupation:</label><br>
+        <input type="text" id="occupation" name="occupation" value=""><br>
+        <label for="parents">Parents:</label><br>
+        <input type="text" id="parents" name="parents" value=""><br>
+        <label for="currentSpouse">Current Spouse:</label><br>
+        <input type="text" id="currentSpouse" name="currentSpouse" value=""><br>
+        <input type="button" onclick="searchByName(), searchBy()"  value="Submit">
+        <input type="button" onclick="buildTable()" value="View All">
+        <input type="button" onclick="" value="Delete">
     </form> 
     
     <!-- Populate table onto site -->
