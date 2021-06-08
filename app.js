@@ -81,9 +81,10 @@ function buildTable(){
 function searchBy(){
     genderInput = document.forms['nameForm']['gender'].value;
     eyeColorInput = document.forms.nameForm.eyeColor.value;   
+    occupationInput = document.forms.nameForm.occupation.value;
     filteredGender = people.filter(function (criteria){
         if(criteria.gender.toLowerCase() === genderInput.toLowerCase() 
-        && criteria.eyeColor.toLowerCase() === eyeColorInput.toLowerCase()){
+        && criteria.eyeColor.toLowerCase() === eyeColorInput.toLowerCase() && criteria.occupation.toLowerCase() === occupationInput.toLowerCase()){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${criteria.id}</td>
             <td>${criteria.firstName}</td>
@@ -238,7 +239,7 @@ function searchFamily(){
     lastNameInput = document.forms['nameForm']['lname'].value;
     personObject = create()
     people.filter(function (person) {
-        if (person.lastName.toLowerCase() === lastNameInput.toLowerCase()){
+        if (person.lastName.toLowerCase() === lastNameInput.toLowerCase() && person.parents[0] !== personObject.id && person.parents[1] !== personObject.id){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${person.id}</td>
             <td>${person.firstName}</td>
