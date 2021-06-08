@@ -1,6 +1,11 @@
 'use strict';
-let filteredGender;
+
 let filteredPeople;
+let genderInput;
+let eyeColorInput;
+let grand;
+let criteria;
+
 let personObject = {
     id: "",
     firstName: "",
@@ -64,12 +69,11 @@ function buildTable(){
 
 
 //Search by specific criteria
-let criteria;
 
 function searchBy(){
     let genderInput = document.forms['nameForm']['gender'].value;
     let eyeColorInput = document.forms.nameForm.eyeColor.value;   
-    filteredGender = people.filter(function (criteria){
+    let filteredGender = people.filter(function (criteria){
         if(criteria.gender === genderInput && criteria.eyeColor === eyeColorInput){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${criteria.id}</td>
@@ -85,11 +89,16 @@ function searchBy(){
             <td>${criteria.currentSpouse}</td>
             </tr>`
         }
-    });
+        else{
         }
+    });
+        if(filteredGender > 0){
+            console.log(filteredGender);
+        }
+}
 
 function searchByGender(){
-    let genderInput = document.forms['nameForm']['gender'].value;
+    genderInput = document.forms['nameForm']['gender'].value;
     filteredGender = people.filter(function (maleOrFemale){
         if(genderInput === maleOrFemale.gender){
             document.getElementById("mostWanted").innerHTML += `<tr>
@@ -110,7 +119,30 @@ function searchByGender(){
 })
 }
 
-let grand;
+function searchByEyeColor(){
+    eyeColorInput = document.forms['nameForm']['eyeColor'].value;
+    filteredEyeColor = people.filter(function (eyeColors){
+        if(eyeColors.eyeColor === eyeColorInput){
+            document.getElementById("mostWanted").innerHTML += `<tr>
+            <td>${eyeColors.id}</td>
+            <td>${eyeColors.firstName}</td>
+            <td>${eyeColors.lastName}</td>
+            <td>${eyeColors.gender}</td>
+            <td>${eyeColors.dob}</td>
+            <td>${eyeColors.height}</td>
+            <td>${eyeColors.weight}</td>
+            <td>${eyeColors.eyeColor}</td>
+            <td>${eyeColors.occupation}</td>
+            <td>${eyeColors.parents}</td>
+            <td>${eyeColors.currentSpouse}</td>
+            </tr>`
+        }
+
+})
+}
+
+
+
 //Search by decendants
 function searchByChildren(){
     // let currentPerson = searchByName();
