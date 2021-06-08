@@ -32,19 +32,7 @@ let personObject = {
 //Builds the table based off the specific person
 function buildTable(element = personObject){
     people.map(function(el){
-    document.getElementById("mostWanted").innerHTML += `<tr>
-    <td>${el.id}</td>
-    <td>${el.firstName}</td>
-    <td>${el.lastName}</td>
-    <td>${el.gender}</td>
-    <td>${el.dob}</td>
-    <td>${el.height}</td>
-    <td>${el.weight}</td>
-    <td>${el.eyeColor}</td>
-    <td>${el.occupation}</td>
-    <td>${el.parents}</td>
-    <td>${el.currentSpouse}</td>
-    </tr>`
+        createTable(el)
     })
 }
 
@@ -58,19 +46,7 @@ function searchByName() {
     filteredPeople = people.filter(function (person) {
         if (person.firstName.toLowerCase() === firstNameInput.toLowerCase() 
         && person.lastName.toLowerCase() === lastNameInput.toLowerCase()) {
-            document.getElementById("mostWanted").innerHTML = `<tr>
-            <td>${person.id}</td>
-            <td>${person.firstName}</td>
-            <td>${person.lastName}</td>
-            <td>${person.gender}</td>
-            <td>${person.dob}</td>
-            <td>${person.height}</td>
-            <td>${person.weight}</td>
-            <td>${person.eyeColor}</td>
-            <td>${person.occupation}</td>
-            <td>${person.parents}</td>
-            <td>${person.currentSpouse}</td>
-            </tr>`
+         createTable(person)
         }
     });
     return personObject;
@@ -103,68 +79,20 @@ function searchBy(){
     filteredGender = people.filter(function (criteria){
         if(genderInput === "" && (eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
         && occupationInput.toLowerCase() === criteria.occupation.toLowerCase())){
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${criteria.id}</td>
-            <td>${criteria.firstName}</td>
-            <td>${criteria.lastName}</td>
-            <td>${criteria.gender}</td>
-            <td>${criteria.dob}</td>
-            <td>${criteria.height}</td>
-            <td>${criteria.weight}</td>
-            <td>${criteria.eyeColor}</td>
-            <td>${criteria.occupation}</td>
-            <td>${criteria.parents}</td>
-            <td>${criteria.currentSpouse}</td>
-            </tr>`
+            createTable(criteria)
         }
         else if(eyeColorInput === "" && (genderInput.toLowerCase() === criteria.gender.toLowerCase()
              && occupationInput.toLowerCase() === criteria.occupation.toLowerCase())){
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${criteria.id}</td>
-            <td>${criteria.firstName}</td>
-            <td>${criteria.lastName}</td>
-            <td>${criteria.gender}</td>
-            <td>${criteria.dob}</td>
-            <td>${criteria.height}</td>
-            <td>${criteria.weight}</td>
-            <td>${criteria.eyeColor}</td>
-            <td>${criteria.occupation}</td>
-            <td>${criteria.parents}</td>
-            <td>${criteria.currentSpouse}</td>
-            </tr>`
+                createTable(criteria)
         }
         else if(occupationInput === "" && (eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
         && genderInput.toLowerCase() === criteria.gender.toLowerCase())){
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${criteria.id}</td>
-            <td>${criteria.firstName}</td>
-            <td>${criteria.lastName}</td>
-            <td>${criteria.gender}</td>
-            <td>${criteria.dob}</td>
-            <td>${criteria.height}</td>
-            <td>${criteria.weight}</td>
-            <td>${criteria.eyeColor}</td>
-            <td>${criteria.occupation}</td>
-            <td>${criteria.parents}</td>
-            <td>${criteria.currentSpouse}</td>
-            </tr>`
+            createTable(criteria)
         }
         else if(eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
             && genderInput.toLowerCase() === criteria.gender.toLowerCase()
              && occupationInput.toLowerCase() === criteria.occupation.toLowerCase()){
-                document.getElementById("mostWanted").innerHTML += `<tr>
-                <td>${criteria.id}</td>
-                <td>${criteria.firstName}</td>
-                <td>${criteria.lastName}</td>
-                <td>${criteria.gender}</td>
-                <td>${criteria.dob}</td>
-                <td>${criteria.height}</td>
-                <td>${criteria.weight}</td>
-                <td>${criteria.eyeColor}</td>
-                <td>${criteria.occupation}</td>
-                <td>${criteria.parents}</td>
-                <td>${criteria.currentSpouse}</td>
-                </tr>`
+                createTable(criteria)
         }
     });
 }
@@ -174,19 +102,7 @@ function searchByGender(){
     genderInput = document.forms['nameForm']['gender'].value;
     filteredGender = people.filter(function (maleOrFemale){
         if(genderInput.toLowerCase() === maleOrFemale.gender.toLowerCase()){
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${maleOrFemale.id}</td>
-            <td>${maleOrFemale.firstName}</td>
-            <td>${maleOrFemale.lastName}</td>
-            <td>${maleOrFemale.gender}</td>
-            <td>${maleOrFemale.dob}</td>
-            <td>${maleOrFemale.height}</td>
-            <td>${maleOrFemale.weight}</td>
-            <td>${maleOrFemale.eyeColor}</td>
-            <td>${maleOrFemale.occupation}</td>
-            <td>${maleOrFemale.parents}</td>
-            <td>${maleOrFemale.currentSpouse}</td>
-            </tr>`
+            createTable(maleOrFemale)
         }
     })
 }
@@ -196,19 +112,7 @@ function searchByEyeColor(){
     eyeColorInput = document.forms['nameForm']['eyeColor'].value;
     filteredEyeColor = people.filter(function (eyeColors){
         if(eyeColors.eyeColor.toLowerCase() === eyeColorInput.toLowerCase()){
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${eyeColors.id}</td>
-            <td>${eyeColors.firstName}</td>
-            <td>${eyeColors.lastName}</td>
-            <td>${eyeColors.gender}</td>
-            <td>${eyeColors.dob}</td>
-            <td>${eyeColors.height}</td>
-            <td>${eyeColors.weight}</td>
-            <td>${eyeColors.eyeColor}</td>
-            <td>${eyeColors.occupation}</td>
-            <td>${eyeColors.parents}</td>
-            <td>${eyeColors.currentSpouse}</td>
-            </tr>`
+            createTable(eyeColors)
         }
     })
 }
@@ -218,19 +122,7 @@ function searchByOccupation(){
     occupationInput = document.forms['nameForm']['occupation'].value;
     filteredOccupation = people.filter(function (job){
         if(job.occupation.toLowerCase() === occupationInput.toLowerCase()){
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${job.id}</td>
-            <td>${job.firstName}</td>
-            <td>${job.lastName}</td>
-            <td>${job.gender}</td>
-            <td>${job.dob}</td>
-            <td>${job.height}</td>
-            <td>${job.weight}</td>
-            <td>${job.eyeColor}</td>
-            <td>${job.occupation}</td>
-            <td>${job.parents}</td>
-            <td>${job.currentSpouse}</td>
-            </tr>`
+            createTable(job)
         }
     })
 }
@@ -244,37 +136,13 @@ function searchByChildren(){
     people.map(function(el) { 
         if ((lastNameInput.toLowerCase() === el.lastName.toLowerCase()  && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)
         || (lastNameInput.toLowerCase() !== el.lastName.toLowerCase() && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)){
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${el.id}</td>
-            <td>${el.firstName}</td>
-            <td>${el.lastName}</td>
-            <td>${el.gender}</td>
-            <td>${el.dob}</td>
-            <td>${el.height}</td>
-            <td>${el.weight}</td>
-            <td>${el.eyeColor}</td>
-            <td>${el.occupation}</td>
-            <td>${el.parents}</td>
-            <td>${el.currentSpouse}</td>
-            </tr>`
+            createTable(el)
             tempPerson = el;
             grand = findGrandChildren(tempPerson); // Uses helper function findGrandChildren(...)
             
         }
         else if(grand !== undefined){
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${el.id}</td>
-            <td>${el.firstName}</td>
-            <td>${el.lastName}</td>
-            <td>${el.gender}</td>
-            <td>${el.dob}</td>
-            <td>${el.height}</td>
-            <td>${el.weight}</td>
-            <td>${el.eyeColor}</td>
-            <td>${el.occupation}</td>
-            <td>${el.parents}</td>
-            <td>${el.currentSpouse}</td>
-            </tr>`
+            createTable(el)
         }
     });
 }
@@ -289,19 +157,7 @@ function searchFamily(){
     people.map(function(el) { 
          if ((lastNameInput.toLowerCase() === el.lastName.toLowerCase()  && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)
          || (lastNameInput.toLowerCase() !== el.lastName.toLowerCase() && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)){
-             document.getElementById("mostWanted").innerHTML += `<tr>
-             <td>${el.id}</td>
-             <td>${el.firstName}</td>
-             <td>${el.lastName}</td>
-             <td>${el.gender}</td>
-             <td>${el.dob}</td>
-             <td>${el.height}</td>
-             <td>${el.weight}</td>
-             <td>${el.eyeColor}</td>
-             <td>${el.occupation}</td>
-             <td>${el.parents}</td>
-             <td>${el.currentSpouse}</td>
-             </tr>`
+             createTable(el)
              tempPerson = el;
              grand = findGrandChildren(tempPerson); // Uses helper function findGrandChildren(...)
          }
@@ -347,4 +203,22 @@ function findGrandChildren(el){
         }
     })
     return grandChild;
+}
+
+
+function createTable(el){
+        document.getElementById("mostWanted").innerHTML += `<tr>
+        <td>${el.id}</td>
+        <td>${el.firstName}</td>
+        <td>${el.lastName}</td>
+        <td>${el.gender}</td>
+        <td>${el.dob}</td>
+        <td>${el.height}</td>
+        <td>${el.weight}</td>
+        <td>${el.eyeColor}</td>
+        <td>${el.occupation}</td>
+        <td>${el.parents}</td>
+        <td>${el.currentSpouse}</td>
+        </tr>`
+
 }
