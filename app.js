@@ -78,13 +78,31 @@ function searchByName() {
 
 // "Advanced search" two or more criteria
 function searchBy(){
-    genderInput = document.forms['nameForm']['gender'].value;
-    eyeColorInput = document.forms.nameForm.eyeColor.value;   
-    occupationInput = document.forms.nameForm.occupation.value;
+  
+    if(document.forms.nameForm.gender.value === undefined){
+        genderInput = ""
+    }
+    else{
+        genderInput = document.forms.nameForm.gender.value.toLowerCase()
+    }
+
+    if(document.forms.nameForm.eyeColor.value === undefined){
+        eyeColorInput = ""
+    }
+    else{
+        eyeColorInput = document.forms.nameForm.eyeColor.value.toLowerCase()
+    }
+
+    if(document.forms.nameForm.occupation.value === undefined){
+        occupationInput = ""
+    }
+    else{
+        occupationInput = document.forms.nameForm.occupation.value.toLowerCase()
+    }
+
     filteredGender = people.filter(function (criteria){
-        if(criteria.gender.toLowerCase() === genderInput.toLowerCase() 
-        && criteria.eyeColor.toLowerCase() === eyeColorInput.toLowerCase() 
-        && criteria.occupation.toLowerCase() === occupationInput.toLowerCase()){
+        if(genderInput === "" && (eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
+        && occupationInput.toLowerCase() === criteria.occupation.toLowerCase())){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${criteria.id}</td>
             <td>${criteria.firstName}</td>
@@ -98,6 +116,55 @@ function searchBy(){
             <td>${criteria.parents}</td>
             <td>${criteria.currentSpouse}</td>
             </tr>`
+        }
+        else if(eyeColorInput === "" && (genderInput.toLowerCase() === criteria.gender.toLowerCase()
+             && occupationInput.toLowerCase() === criteria.occupation.toLowerCase())){
+            document.getElementById("mostWanted").innerHTML += `<tr>
+            <td>${criteria.id}</td>
+            <td>${criteria.firstName}</td>
+            <td>${criteria.lastName}</td>
+            <td>${criteria.gender}</td>
+            <td>${criteria.dob}</td>
+            <td>${criteria.height}</td>
+            <td>${criteria.weight}</td>
+            <td>${criteria.eyeColor}</td>
+            <td>${criteria.occupation}</td>
+            <td>${criteria.parents}</td>
+            <td>${criteria.currentSpouse}</td>
+            </tr>`
+        }
+        else if(occupationInput === "" && (eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
+        && genderInput.toLowerCase() === criteria.gender.toLowerCase())){
+            document.getElementById("mostWanted").innerHTML += `<tr>
+            <td>${criteria.id}</td>
+            <td>${criteria.firstName}</td>
+            <td>${criteria.lastName}</td>
+            <td>${criteria.gender}</td>
+            <td>${criteria.dob}</td>
+            <td>${criteria.height}</td>
+            <td>${criteria.weight}</td>
+            <td>${criteria.eyeColor}</td>
+            <td>${criteria.occupation}</td>
+            <td>${criteria.parents}</td>
+            <td>${criteria.currentSpouse}</td>
+            </tr>`
+        }
+        else if(eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
+            && genderInput.toLowerCase() === criteria.gender.toLowerCase()
+             && occupationInput.toLowerCase() === criteria.occupation.toLowerCase()){
+                document.getElementById("mostWanted").innerHTML += `<tr>
+                <td>${criteria.id}</td>
+                <td>${criteria.firstName}</td>
+                <td>${criteria.lastName}</td>
+                <td>${criteria.gender}</td>
+                <td>${criteria.dob}</td>
+                <td>${criteria.height}</td>
+                <td>${criteria.weight}</td>
+                <td>${criteria.eyeColor}</td>
+                <td>${criteria.occupation}</td>
+                <td>${criteria.parents}</td>
+                <td>${criteria.currentSpouse}</td>
+                </tr>`
         }
     });
 }
@@ -166,27 +233,6 @@ function searchByOccupation(){
             </tr>`
         }
     })
-}
-
-// Needs further work
-function searchByParents(){
-    people.map(function(el){
-        if (el.parents[0] === undefined && el.parents[1] === undefined) {
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${el.id}</td>
-            <td>${el.firstName}</td>
-            <td>${el.lastName}</td>
-            <td>${el.gender}</td>
-            <td>${el.dob}</td>
-            <td>${el.height}</td>
-            <td>${el.weight}</td>
-            <td>${el.eyeColor}</td>
-            <td>${el.occupation}</td>
-            <td>${el.parents}</td>
-            <td>${el.currentSpouse}</td>
-            </tr>`
-        }
-    })   
 }
 
 // Search by decendants button
