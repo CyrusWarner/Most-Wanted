@@ -29,8 +29,10 @@ let personObject = {
 };
 
 
-//Builds the table based off the specific person
-function buildTable(element = personObject){
+//View all button builds table in bottom function
+function buildTable(){
+    let Table = document.getElementById("mostWanted");
+    Table.innerHTML = "";
     people.map(function(el){
         createTable(el)
     })
@@ -45,8 +47,10 @@ function searchByName() {
     // "people" is coming from the data.js file. We have access to it within this JavaScript file.
     filteredPeople = people.filter(function (person) {
         if (person.firstName.toLowerCase() === firstNameInput.toLowerCase() 
-        && person.lastName.toLowerCase() === lastNameInput.toLowerCase()) {
-         createTable(person)
+        &&  person.lastName.toLowerCase() === lastNameInput.toLowerCase()) {
+        let Table = document.getElementById("mostWanted");
+        Table.innerHTML = "";
+        createTable(person)
         }
     });
     return personObject;
@@ -79,19 +83,23 @@ function searchBy(){
     filteredGender = people.filter(function (criteria){
         if(genderInput === "" && (eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
         && occupationInput.toLowerCase() === criteria.occupation.toLowerCase())){
+            
             createTable(criteria)
         }
         else if(eyeColorInput === "" && (genderInput.toLowerCase() === criteria.gender.toLowerCase()
              && occupationInput.toLowerCase() === criteria.occupation.toLowerCase())){
+                
                 createTable(criteria)
         }
         else if(occupationInput === "" && (eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
         && genderInput.toLowerCase() === criteria.gender.toLowerCase())){
+            
             createTable(criteria)
         }
         else if(eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
             && genderInput.toLowerCase() === criteria.gender.toLowerCase()
              && occupationInput.toLowerCase() === criteria.occupation.toLowerCase()){
+                
                 createTable(criteria)
         }
     });
