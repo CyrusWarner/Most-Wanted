@@ -1,5 +1,5 @@
 'use strict';
-
+let filteredGender;
 let filteredPeople;
 let personObject = {
     id: "",
@@ -58,8 +58,9 @@ function buildTable(){
     <td>${el.parents}</td>
     <td>${el.currentSpouse}</td>
     </tr>`
-})
+    })
 }
+
 
 
 //Search by specific criteria
@@ -68,12 +69,8 @@ let criteria;
 function searchBy(){
     let genderInput = document.forms['nameForm']['gender'].value;
     let eyeColorInput = document.forms.nameForm.eyeColor.value;   
-    let flag = false;
-    let filteredGender = people.filter(function (criteria) {
-        if(genderInput.length > 0){
-            flag = true;
-        }
-        if(criteria.gender === genderInput && criteria.eyeColor === eyeColorInput && flag){
+    filteredGender = people.filter(function (criteria){
+        if(criteria.gender === genderInput && criteria.eyeColor === eyeColorInput){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${criteria.id}</td>
             <td>${criteria.firstName}</td>
@@ -88,12 +85,29 @@ function searchBy(){
             <td>${criteria.currentSpouse}</td>
             </tr>`
         }
-        else{
-        }
     });
-        if(filteredGender > 0){
-            console.log(filteredGender);
         }
+
+function searchByGender(){
+    let genderInput = document.forms['nameForm']['gender'].value;
+    filteredGender = people.filter(function (maleOrFemale){
+        if(genderInput === maleOrFemale.gender){
+            document.getElementById("mostWanted").innerHTML += `<tr>
+            <td>${maleOrFemale.id}</td>
+            <td>${maleOrFemale.firstName}</td>
+            <td>${maleOrFemale.lastName}</td>
+            <td>${maleOrFemale.gender}</td>
+            <td>${maleOrFemale.dob}</td>
+            <td>${maleOrFemale.height}</td>
+            <td>${maleOrFemale.weight}</td>
+            <td>${maleOrFemale.eyeColor}</td>
+            <td>${maleOrFemale.occupation}</td>
+            <td>${maleOrFemale.parents}</td>
+            <td>${maleOrFemale.currentSpouse}</td>
+            </tr>`
+        }
+
+})
 }
 
 let grand;
@@ -105,9 +119,8 @@ function searchByChildren(){
     let tempPerson;
 
     people.map(function(el) { 
-        if (theLastName === el.lastName 
-            && el.parents[0] === personObject.id
-            || el.parents[1] === personObject.id){
+        if ((theLastName === el.lastName  && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)
+        || (theLastName !== el.lastName && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${el.id}</td>
             <td>${el.firstName}</td>
@@ -205,16 +218,11 @@ function findGrandChildren(el){
     })
     
 
-
-
-
-
-
-
     return grandChild;
 
 
 }
+
 
 
 
