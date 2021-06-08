@@ -12,7 +12,6 @@ let filteredGender;
 let filteredEyeColor;
 let filteredOccupation;
 
-let grand; // The grandchildren
 let criteria; // Search by function
 
 let personObject = {
@@ -27,39 +26,11 @@ let personObject = {
     occupation: "",
     parents: [],
     currentSpouse: ""
-};;
+};
 
-
-// Advance search of specific people with two or more criteria
-function searchByName() {
-    // Grabbing the values from our nameForm form and inputs.
-    firstNameInput = document.forms['nameForm']['fname'].value;
-    lastNameInput = document.forms['nameForm']['lname'].value;
-
-    // "people" is coming from the data.js file. We have access to it within this JavaScript file.
-    filteredPeople = people.filter(function (person) {
-        if (person.firstName.toLowerCase() === firstNameInput.toLowerCase() 
-        && person.lastName.toLowerCase() === lastNameInput.toLowerCase()) {
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${person.id}</td>
-            <td>${person.firstName}</td>
-            <td>${person.lastName}</td>
-            <td>${person.gender}</td>
-            <td>${person.dob}</td>
-            <td>${person.height}</td>
-            <td>${person.weight}</td>
-            <td>${person.eyeColor}</td>
-            <td>${person.occupation}</td>
-            <td>${person.parents}</td>
-            <td>${person.currentSpouse}</td>
-            </tr>`
-        }
-    });
-    return personObject;
-}
 
 //Builds the table based off the specific person
-function buildTable(){
+function buildTable(element = personObject){
     people.map(function(el){
     document.getElementById("mostWanted").innerHTML += `<tr>
     <td>${el.id}</td>
@@ -77,14 +48,43 @@ function buildTable(){
     })
 }
 
-// "Advanced search"
+// Name search
+function searchByName() {
+    // Grabbing the values from our nameForm form and inputs.
+    firstNameInput = document.forms['nameForm']['fname'].value;
+    lastNameInput = document.forms['nameForm']['lname'].value;
+
+    // "people" is coming from the data.js file. We have access to it within this JavaScript file.
+    filteredPeople = people.filter(function (person) {
+        if (person.firstName.toLowerCase() === firstNameInput.toLowerCase() 
+        && person.lastName.toLowerCase() === lastNameInput.toLowerCase()) {
+            document.getElementById("mostWanted").innerHTML = `<tr>
+            <td>${person.id}</td>
+            <td>${person.firstName}</td>
+            <td>${person.lastName}</td>
+            <td>${person.gender}</td>
+            <td>${person.dob}</td>
+            <td>${person.height}</td>
+            <td>${person.weight}</td>
+            <td>${person.eyeColor}</td>
+            <td>${person.occupation}</td>
+            <td>${person.parents}</td>
+            <td>${person.currentSpouse}</td>
+            </tr>`
+        }
+    });
+    return personObject;
+}
+
+// "Advanced search" two or more criteria
 function searchBy(){
     genderInput = document.forms['nameForm']['gender'].value;
     eyeColorInput = document.forms.nameForm.eyeColor.value;   
     occupationInput = document.forms.nameForm.occupation.value;
     filteredGender = people.filter(function (criteria){
         if(criteria.gender.toLowerCase() === genderInput.toLowerCase() 
-        && criteria.eyeColor.toLowerCase() === eyeColorInput.toLowerCase() && criteria.occupation.toLowerCase() === occupationInput.toLowerCase()){
+        && criteria.eyeColor.toLowerCase() === eyeColorInput.toLowerCase() 
+        && criteria.occupation.toLowerCase() === occupationInput.toLowerCase()){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${criteria.id}</td>
             <td>${criteria.firstName}</td>
@@ -191,11 +191,10 @@ function searchByParents(){
 
 // Search by decendants button
 function searchByChildren(){
-    // let currentPerson = searchByName();
+    let grand;
     lastNameInput = document.forms['nameForm']['lname'].value;
     personObject = create()
     let tempPerson;
-
     people.map(function(el) { 
         if ((lastNameInput.toLowerCase() === el.lastName.toLowerCase()  && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)
         || (lastNameInput.toLowerCase() !== el.lastName.toLowerCase() && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)){
@@ -236,25 +235,34 @@ function searchByChildren(){
 
 // Search by family button
 function searchFamily(){
+    // let currentPerson = searchByName();
+    let grand;
     lastNameInput = document.forms['nameForm']['lname'].value;
     personObject = create()
-    people.filter(function (person) {
-        if (person.lastName.toLowerCase() === lastNameInput.toLowerCase() && person.parents[0] !== personObject.id && person.parents[1] !== personObject.id){
-            document.getElementById("mostWanted").innerHTML += `<tr>
-            <td>${person.id}</td>
-            <td>${person.firstName}</td>
-            <td>${person.lastName}</td>
-            <td>${person.gender}</td>
-            <td>${person.dob}</td>
-            <td>${person.height}</td>
-            <td>${person.weight}</td>
-            <td>${person.eyeColor}</td>
-            <td>${person.occupation}</td>
-            <td>${person.parents}</td>
-            <td>${person.currentSpouse}</td>
-            </tr>`
-        }
-    })
+    let tempPerson;
+    people.map(function(el) { 
+         if ((lastNameInput.toLowerCase() === el.lastName.toLowerCase()  && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)
+         || (lastNameInput.toLowerCase() !== el.lastName.toLowerCase() && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)){
+             document.getElementById("mostWanted").innerHTML += `<tr>
+             <td>${el.id}</td>
+             <td>${el.firstName}</td>
+             <td>${el.lastName}</td>
+             <td>${el.gender}</td>
+             <td>${el.dob}</td>
+             <td>${el.height}</td>
+             <td>${el.weight}</td>
+             <td>${el.eyeColor}</td>
+             <td>${el.occupation}</td>
+             <td>${el.parents}</td>
+             <td>${el.currentSpouse}</td>
+             </tr>`
+             tempPerson = el;
+             grand = findGrandChildren(tempPerson); // Uses helper function findGrandChildren(...)
+         }
+         else if(grand !== undefined){
+            //  do nothing...
+         }
+    });
 }
 
 // Creates the person object to be referenced against.
