@@ -1,10 +1,19 @@
 'use strict';
 
+// Variables that need to be declared.
+let firstNameInput; // Input for first name
+let lastNameInput; // Input for last name
+let genderInput; // Input for gender
+let eyeColorInput; // Input for eye color
+let occupationInput; // Input for occupation
+
 let filteredPeople;
-let genderInput;
-let eyeColorInput;
-let grand;
-let criteria;
+let filteredGender;
+let filteredEyeColor;
+let filteredOccupation;
+
+let grand; // The grandchildren
+let criteria; // Search by function
 
 let personObject = {
     id: "",
@@ -20,10 +29,12 @@ let personObject = {
     currentSpouse: ""
 };;
 
+
+// Advance search of specific people with two or more criteria
 function searchByName() {
     // Grabbing the values from our nameForm form and inputs.
-    let firstNameInput = document.forms['nameForm']['fname'].value;
-    let lastNameInput = document.forms['nameForm']['lname'].value;
+    firstNameInput = document.forms['nameForm']['fname'].value;
+    lastNameInput = document.forms['nameForm']['lname'].value;
 
     // "people" is coming from the data.js file. We have access to it within this JavaScript file.
     filteredPeople = people.filter(function (person) {
@@ -66,15 +77,13 @@ function buildTable(){
     })
 }
 
-
-
-//Search by specific criteria
-
+// "Advanced search"
 function searchBy(){
-    let genderInput = document.forms['nameForm']['gender'].value;
-    let eyeColorInput = document.forms.nameForm.eyeColor.value;   
-    let filteredGender = people.filter(function (criteria){
-        if(criteria.gender === genderInput && criteria.eyeColor === eyeColorInput){
+    genderInput = document.forms['nameForm']['gender'].value;
+    eyeColorInput = document.forms.nameForm.eyeColor.value;   
+    filteredGender = people.filter(function (criteria){
+        if(criteria.gender.toLowerCase() === genderInput.toLowerCase() 
+        && criteria.eyeColor.toLowerCase() === eyeColorInput.toLowerCase()){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${criteria.id}</td>
             <td>${criteria.firstName}</td>
@@ -89,18 +98,14 @@ function searchBy(){
             <td>${criteria.currentSpouse}</td>
             </tr>`
         }
-        else{
-        }
     });
-        if(filteredGender > 0){
-            console.log(filteredGender);
-        }
 }
 
+// Gender button
 function searchByGender(){
     genderInput = document.forms['nameForm']['gender'].value;
     filteredGender = people.filter(function (maleOrFemale){
-        if(genderInput === maleOrFemale.gender){
+        if(genderInput.toLowerCase() === maleOrFemale.gender.toLowerCase()){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${maleOrFemale.id}</td>
             <td>${maleOrFemale.firstName}</td>
@@ -115,14 +120,14 @@ function searchByGender(){
             <td>${maleOrFemale.currentSpouse}</td>
             </tr>`
         }
-
-})
+    })
 }
 
+// Eye color button
 function searchByEyeColor(){
     eyeColorInput = document.forms['nameForm']['eyeColor'].value;
     filteredEyeColor = people.filter(function (eyeColors){
-        if(eyeColors.eyeColor === eyeColorInput){
+        if(eyeColors.eyeColor.toLowerCase() === eyeColorInput.toLowerCase()){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${eyeColors.id}</td>
             <td>${eyeColors.firstName}</td>
@@ -137,22 +142,62 @@ function searchByEyeColor(){
             <td>${eyeColors.currentSpouse}</td>
             </tr>`
         }
-
-})
+    })
 }
 
+// Occupation button
+function searchByOccupation(){
+    occupationInput = document.forms['nameForm']['occupation'].value;
+    filteredOccupation = people.filter(function (job){
+        if(job.occupation.toLowerCase() === occupationInput.toLowerCase()){
+            document.getElementById("mostWanted").innerHTML += `<tr>
+            <td>${job.id}</td>
+            <td>${job.firstName}</td>
+            <td>${job.lastName}</td>
+            <td>${job.gender}</td>
+            <td>${job.dob}</td>
+            <td>${job.height}</td>
+            <td>${job.weight}</td>
+            <td>${job.eyeColor}</td>
+            <td>${job.occupation}</td>
+            <td>${job.parents}</td>
+            <td>${job.currentSpouse}</td>
+            </tr>`
+        }
+    })
+}
 
+// Needs further work
+function searchByParents(){
+    people.map(function(el){
+        if (el.parents[0] === undefined && el.parents[1] === undefined) {
+            document.getElementById("mostWanted").innerHTML += `<tr>
+            <td>${el.id}</td>
+            <td>${el.firstName}</td>
+            <td>${el.lastName}</td>
+            <td>${el.gender}</td>
+            <td>${el.dob}</td>
+            <td>${el.height}</td>
+            <td>${el.weight}</td>
+            <td>${el.eyeColor}</td>
+            <td>${el.occupation}</td>
+            <td>${el.parents}</td>
+            <td>${el.currentSpouse}</td>
+            </tr>`
+        }
+    })   
+}
 
-//Search by decendants
+// Search by decendants button
 function searchByChildren(){
     // let currentPerson = searchByName();
-    let theLastName = document.forms['nameForm']['lname'].value;
+    lastNameInput = document.forms['nameForm']['lname'].value;
     personObject = create()
     let tempPerson;
 
     people.map(function(el) { 
-        if ((theLastName === el.lastName  && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)
-        || (theLastName !== el.lastName && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)){
+        if ((lastNameInput.toLowerCase() === el.lastName.toLowerCase()  && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)
+        || (lastNameInput.toLowerCase() !== el.lastName.toLowerCase() && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${el.id}</td>
             <td>${el.firstName}</td>
@@ -167,7 +212,7 @@ function searchByChildren(){
             <td>${el.currentSpouse}</td>
             </tr>`
             tempPerson = el;
-            grand = findGrandChildren(tempPerson);
+            grand = findGrandChildren(tempPerson); // Uses helper function findGrandChildren(...)
             
         }
         else if(grand !== undefined){
@@ -188,12 +233,12 @@ function searchByChildren(){
     });
 }
 
-
+// Search by family button
 function searchFamily(){
-    let theLastName = document.forms['nameForm']['lname'].value;
+    lastNameInput = document.forms['nameForm']['lname'].value;
     personObject = create()
     people.filter(function (person) {
-        if (person.lastName === theLastName){
+        if (person.lastName.toLowerCase() === lastNameInput.toLowerCase()){
             document.getElementById("mostWanted").innerHTML += `<tr>
             <td>${person.id}</td>
             <td>${person.firstName}</td>
@@ -211,14 +256,14 @@ function searchFamily(){
     })
 }
 
-
+// Creates the person object to be referenced against.
 function create(){
     people.filter(function (person){
 
-    let theFirstName = document.forms['nameForm']['fname'].value;
-    let theLastName = document.forms['nameForm']['lname'].value;
-    if (person.firstName.toLowerCase() === theFirstName.toLowerCase() 
-        && person.lastName.toLowerCase() === theLastName.toLowerCase()) {
+    firstNameInput = document.forms['nameForm']['fname'].value;
+    lastNameInput = document.forms['nameForm']['lname'].value;
+    if (person.firstName.toLowerCase() === firstNameInput.toLowerCase() 
+        && person.lastName.toLowerCase() === lastNameInput.toLowerCase()) {
         personObject =  {
             "id": person.id,
             "firstName": person.firstName,
@@ -237,24 +282,14 @@ function create(){
     return personObject;
 }
 
+// Helper function for searchByChildren
 function findGrandChildren(el){
     let parent = el
     let grandChild;
     people.filter(function (children){
         if(children.parents[0] === parent.id || children.parents[1] === parent.id){
             grandChild = children;
-
-
         }
-
     })
-    
-
     return grandChild;
-
-
 }
-
-
-
-
