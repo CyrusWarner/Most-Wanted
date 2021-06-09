@@ -3,35 +3,98 @@
   <head>
     <meta charset="utf-8">
     <title>devCodeCamp &middot; Most Wanted</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   </head>
   <body>
-    <form id="nameForm">
-        <label for="fname">First name:</label><br>
-        <input type="text" id="fname" name="fname" value=""><br>
-        <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br>
-        <label for="gender">Gender:</label><br>
-        <input type="text" id="gender" name="gender" value=""><br>
-        <label for="eyeColor">Eye Color:</label><br>
-        <input type="text" id="eyeColor" name="eyeColor" value=""><br>
-        <label for="occupation">Occupation:</label><br>
-        <input type="text" id="occupation" name="occupation" value=""><br><br>
-        <input type="button" onclick="searchBy()"  value="Search">
-        <input type="button" onclick="buildTable(people)" value="View All">
-        <input type="button" onclick="window.location.reload();" value="Refresh">
-    </form> 
+    <div class="wrapper"> <!-- Start div wrapper -->
+      <div class="bg-header" id="bg-peek"> 
+        <!-- Added big background image for top of page -->
+        <div class="w3-display-middle w3-text-black w3-jumbo">
+          Most Wanted
+        </div>
+      </div>
 
-    <!-- Populate table onto site -->
-    <table>
-      <thead id="table-top-row">
-          
-      </thead>
-      <tbody id="mostWanted">
+      <!-- Center of the screen (big screens) -->
+      <article class="main">
+        <p>
+          If you have any details regarding any suspicious individuals, please feel free to
+          input either their name, gender, eye color, or occupation to see if we can find
+          them in our database. In case you don't know their name, you can also just "View All"
+          to see if you can match your data with what we have in our database.
+        </p>
   
-      </tbody>
-    </table>
-    <!-- End table -->
+      </article>
 
+      <!-- Left side of the screen (big screens) -->
+      <aside class="aside aside-1">
+        <form id="nameForm">
+          <div class="info">
+            <label for="fname">First name:</label><br>
+            <input type="text" id="fname" name="fname" placeholder="i.e. John"><br>
+            <label for="lname">Last name:</label><br>
+            <input type="text" id="lname" name="lname" placeholder="i.e. Doe"><br>
+            <label for="gender">Gender:</label><br>
+            <input type="text" id="gender" name="gender" placeholder="i.e. Male"><br>
+            <label for="eyeColor">Eye Color:</label><br>
+            <input type="text" id="eyeColor" name="eyeColor" placeholder="i.e. Brown"><br>
+            <label for="occupation">Occupation:</label><br>
+            <input type="text" id="occupation" name="occupation" placeholder="i.e. Programmer"><br>
+          </div>
+          <!-- Separate buttons from text areas -->
+          <div class="buttons">
+            <input type="button" onclick="searchBy(), document.getElementById('id01').style.display='block'" 
+            class=" w3-btn w3-round-large w3-wide w3-hover-white" value="Search">
+            <input type="button" onclick="buildTable(people), document.getElementById('id01').style.display='block'"
+            class="w3-btn w3-round-large w3-wide w3-hover-white" value="View All">
+            <input type="button" onclick="window.location.reload();" 
+            class="w3-btn w3-round-large w3-wide w3-hover-white" value="Refresh">
+          </div>
+        </form> 
+      </aside>
+      
+      <!-- Right side of the screen (big screens) -->
+      <aside class="aside aside-2">
+        <div class="bg-right" id="bg-thinking">
+          <!-- Holds another image -->
+        </div>
+        <!-- Start of popup Modal HTML code -->
+        <div id="id01" class="w3-modal">
+          <div class="w3-modal-content w3-animate-top w3-card-4">
+            <header class="w3-container modal-color">
+              <span onclick="document.getElementById('id01').style.display='none'"
+                class="w3-button w3-display-topright">&times;</span>
+              <h1 id="table-header">
+                <!-- Content from app.js -->
+              </h1>
+            </header>
+            <div class="w3-responsive">
+              <table class="w3-table-all">
+                <thead id="table-top-row">
+                  <!-- Content from app.js -->
+                </thead>
+  
+                <tbody id="mostWanted">
+                  <!-- Content from app.js -->
+                </tbody>
+              </table>
+            </div>
+            <footer class="w3-container modal-color">
+              <p style="margin: 1rem 1rem 1rem; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: white;">
+                If you know any person in our database, please don't hesitate to contact us.
+              </p>
+            </footer>
+          </div>
+        </div>
+      </aside>
+      
+      <!-- Bottom of screen (big screen) -->
+      <footer class="footer">
+        <p id="footer-paragraph">
+          <!-- Open area -->
+        </p>
+      </footer>
+    </div> <!-- End div wrapper --> 
     <script src="./javascript/data.js"></script>
     <script src="./javascript/app.js"></script>
   </body>

@@ -198,6 +198,9 @@ function buildTable(peopleToPopulate){
 
 // Creates a table based off of buildTable(parameter). 
 function createTable(el){
+        document.getElementById("table-header").innerHTML = `<h1 style="font-weight: bold;">
+        Wanted: Dead Or Alive
+        </h1>`
         document.getElementById("table-top-row").innerHTML = `<tr>
         <th>Id</th>
         <th>First Name</th>
@@ -256,17 +259,3 @@ function create(){
     })
     return personObject;
 }
-
-//     let family = [];
-//     lastNameInput = document.forms['nameForm']['lname'].value;
-//     people.map(function(el) { 
-//     if ((lastNameInput.toLowerCase() === el.lastName.toLowerCase() || el.parents.includes(personToSearch))){
-//         family.push(el)
-//         // finds grand child using findGrandChildren(... , ...) helper function
-//         family = findGrandChildren(el, family); // Uses helper function findGrandChildren(...)
-//     }
-//     else if(grand !== undefined){
-//        // if the grand is found, then we must remove them.
-//        console.log("we working");
-//     }
-// });
