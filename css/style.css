@@ -1,0 +1,165 @@
+body {
+    background-color: #1F1F1D;
+}
+
+form {
+    color: charcoal;
+    display: grid;
+    vertical-align: baseline;
+    background-color: #B3AEAB;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1rem;
+    margin: 1rem 0rem 0rem 1rem;
+    padding: 2rem 0rem 2rem 0rem;
+}
+
+h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: xx-large;
+}
+
+p {
+    color: #ffffff;
+    font-size: x-large;
+    padding: 0rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+thead {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: underline;
+}
+
+.wrapper {
+    display: flex;  
+    flex-flow: row wrap;
+    font-weight: bold;
+    text-align: center; 
+}
+
+.wrapper > * {
+    padding: 2rem;
+    flex: 1 100%;
+}
+
+.header {
+    color: charcoal;
+    padding: 16rem 2rem 0rem 0rem;
+    font-size: xxx-large;
+}
+
+.bg-header {
+    /* Photo by cottonbro from Pexels */
+    background-image: url(../images/cigar.gif);
+}
+
+.bg-right {
+    background-image: url(../images/thinking.jpg);
+}
+
+.buttons {
+    display: contents;
+}
+
+.info {
+    display: flex;
+    flex-flow: column;
+    font-weight: bold;
+    font-size: large;
+    margin: 0rem 0rem 0rem 0rem;
+}
+
+.footer {
+    display: flex;  
+    flex-flow: row wrap;
+    font-weight: bold;
+    text-align: center; 
+    background: #1F1F1D;
+    font-size: medium;
+}
+
+.main {
+    padding: 0rem 1rem 0rem 0rem; 
+    text-align: -webkit-center;
+    background: #84847C;
+    line-height: 2.25rem;
+}
+
+.aside-1 {
+    background: #84847C;
+    margin: inherit;
+    padding: 0rem 1rem 0rem 0rem;
+}
+
+.aside-2 {
+    background: #84847C;
+    align-content: center;
+}
+
+.modal-color {
+    background-color: #0a0a0a;
+}
+
+@media all and (min-width: 600px) {
+    .aside { flex: 1 0 0; }
+}
+
+@media all and (min-width: 800px) {
+    .main    { flex: 3 0px; }
+    .aside-1 { order: 1; } 
+    .main    { order: 2; }
+    .aside-2 { order: 3; }
+    .footer  { order: 4; }
+}
+
+
+#bg-peek {
+    height: 500px;
+    width: initial;
+    -webkit-background-size: 100% auto;
+    -moz-background-size: 100% auto;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-box-shadow: rgba(0,0,0,0.20) 0 10px 10px;
+    -moz-box-shadow: rgba(0,0,0,0.20) 0 10px 10px;
+    box-shadow: rgba(0,0,0,0.20) 0 10px 10px;
+}
+
+#bg-book {
+    height: 25rem;
+    width: initial;
+    padding: 4rem 2rem 2rem 2rem;
+    margin: 2rem 1rem 2rem 1rem;
+    -webkit-background-size: 75% auto;
+    -moz-background-size: 75% auto;
+    background-size: 75% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* -webkit-box-shadow: rgba(0,0,0,0.20) 0 10px 10px;
+    -moz-box-shadow: rgba(0,0,0,0.20) 0 10px 10px;
+    box-shadow: rgba(0,0,0,0.20) 0 10px 10px; */
+}
+
+#table-header {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    flex-flow: row wrap;
+    font-weight: bold;
+    text-align: center; 
+    margin: 1rem 1rem 1rem 1rem;
+    color: whitesmoke;
+}
+
+#header-temp {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    flex-flow: row wrap;
+    font-weight: bold;
+    text-align: center; 
+    margin: 1rem 1rem 1rem 1rem;
+    color:  whitesmoke;
+}
+
+#footer-paragraph {
+    text-align: left;
+    font-size: medium;
+}

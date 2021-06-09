@@ -9,40 +9,23 @@
         <label for="fname">First name:</label><br>
         <input type="text" id="fname" name="fname" value=""><br>
         <label for="lname">Last name:</label><br>
-        <input type="text" id="lname" name="lname" value=""><br><br>
+        <input type="text" id="lname" name="lname" value=""><br>
         <label for="gender">Gender:</label><br>
         <input type="text" id="gender" name="gender" value=""><br>
         <label for="eyeColor">Eye Color:</label><br>
         <input type="text" id="eyeColor" name="eyeColor" value=""><br>
         <label for="occupation">Occupation:</label><br>
-        <input type="text" id="occupation" name="occupation" value=""><br>
-        <input type="button" onclick="searchBy()"  value="Advanced Search">
-        <input type="button" onclick="searchByName()"  value="Search By Name">
-        <input type="button" onclick="searchByGender()"  value="Gender Search">
-        <input type="button" onclick="searchByEyeColor()"  value="Eye Color">
-        <input type="button" onclick="searchByOccupation()"  value="Occupation">
-        <input type="button" onclick="searchByParents()"  value="Display Parents">
-        <input type="button" onclick="searchByChildren()"  value="Display Descendants">
-        <input type="button" onclick="searchFamily()" value="Display Family">
-        <input type="button" onclick="buildTable()" value="View All">
+        <input type="text" id="occupation" name="occupation" value=""><br><br>
+        <input type="button" onclick="searchBy()"  value="Search">
+        <input type="button" onclick="searchByFamily(people)" value="Display Family">
+        <input type="button" onclick="buildTable(people)" value="View All">
+        <input type="button" onclick="window.location.reload();" value="Refresh">
     </form> 
 
     <!-- Populate table onto site -->
     <table>
-      <thead>
-          <tr>
-              <th>Id</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Gender</th>
-              <th>DOB</th>
-              <th>Height</th>
-              <th>Weight</th>
-              <th>Eye Color</th>
-              <th>Occupation</th>
-              <th>Parents</th>
-              <th>Current Spouse</th>
-          </tr>
+      <thead id="table-top-row">
+          
       </thead>
       <tbody id="mostWanted">
   
@@ -50,7 +33,7 @@
     </table>
     <!-- End table -->
 
-    <script src="data.js"></script>
-    <script src="app.js"></script>
+    <script src="./javascript/data.js"></script>
+    <script src="./javascript/app.js"></script>
   </body>
 </html>
