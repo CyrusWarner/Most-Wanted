@@ -138,12 +138,12 @@ function findGrandChildren(el, descendants){
 }
 
 // Search by family button
-function searchByFamily(idNumber, spouseNumber, last){
+function searchByFamily(idNumber, spouseNumber, first, last){
     console.log(idNumber + " " + spouseNumber + " " + last); // Good.
     let results = people;
     let tempSpouse = findSpouse(idNumber);
     let tempParents = findParents(spouseNumber);
-    let tempSibilings = findSibilings(last);
+    let tempSibilings = findSibilings(first, last);
     
     if(tempSpouse != ""){
         results = tempSpouse;
@@ -178,11 +178,15 @@ function findParents(peopleToSearch){
 }
 
 // Helper function to searchByFamily - Sibilings
-function findSibilings(last){
+function findSibilings(first, last){
     filteredSibilings = people.filter(function (hermano){
+        if(first === hermano.firstName && last == hermano.lastName){
+            return false;
+        }
         if(last === hermano.lastName && (hermano.parents[0] === undefined && hermano.parents[1] === undefined)){
             return true;
         }
+
     })
     return filteredSibilings;
 }
@@ -227,7 +231,7 @@ function createTable(el){
         <td>${el.parents}</td>
         <td>${el.currentSpouse}</td>
         <td><button onclick="searchByChildren(${el.id})">Display Descendants</button></td>
-        <td><button onclick="searchByFamily(${el.id}, ${el.currentSpouse}, '${el.lastName}')">
+        <td><button onclick="searchByFamily(${el.id}, ${el.currentSpouse},'${el.firstName}', '${el.lastName}')">
         Display Family
         </button></td>
         </tr>`
