@@ -11,8 +11,9 @@ let filteredPeople;
 let filteredGender;
 let filteredEyeColor;
 let filteredOccupation;
-
-let criteria; // Search by function
+let filteredFirstName;
+let filteredLastName;
+let grand;
 
 let personObject = {
     id: "",
@@ -28,152 +29,122 @@ let personObject = {
     currentSpouse: ""
 };
 
-
-//View all button builds table in bottom function
-function buildTable(){
-    let Table = document.getElementById("mostWanted");
-    Table.innerHTML = "";
-    people.map(function(el){
-        createTable(el)
-    })
-}
-
-// Name search
-function searchByName() {
-    // Grabbing the values from our nameForm form and inputs.
-    firstNameInput = document.forms['nameForm']['fname'].value;
-    lastNameInput = document.forms['nameForm']['lname'].value;
-
-    // "people" is coming from the data.js file. We have access to it within this JavaScript file.
-    filteredPeople = people.filter(function (person) {
-        if (person.firstName.toLowerCase() === firstNameInput.toLowerCase() 
-        &&  person.lastName.toLowerCase() === lastNameInput.toLowerCase()) {
-        let Table = document.getElementById("mostWanted");
-        Table.innerHTML = "";
-        createTable(person)
-        }
-    });
-    return personObject;
-}
-
 // "Advanced search" two or more criteria
 function searchBy(){
-  
-    if(document.forms.nameForm.gender.value === undefined){
-        genderInput = ""
+    let results = people;
+    if(document.forms.nameForm.fname.value != ""){
+        results = searchByFirstName(results)
     }
-    else{
-        genderInput = document.forms.nameForm.gender.value.toLowerCase()
+    if(document.forms.nameForm.lname.value != ""){
+        results = searchByLastName(results)
     }
-
-    if(document.forms.nameForm.eyeColor.value === undefined){
-        eyeColorInput = ""
+    if(document.forms.nameForm.gender.value != ""){
+        results = searchByGender(results)
     }
-    else{
-        eyeColorInput = document.forms.nameForm.eyeColor.value.toLowerCase()
+    if(document.forms.nameForm.eyeColor.value != ""){
+        results = searchByEyeColor(results);
     }
-
-    if(document.forms.nameForm.occupation.value === undefined){
-        occupationInput = ""
-    }
-    else{
-        occupationInput = document.forms.nameForm.occupation.value.toLowerCase()
+    if(document.forms.nameForm.occupation.value != ""){
+        results = searchByOccupation(results);
     }
 
-    filteredGender = people.filter(function (criteria){
-        if(genderInput === "" && (eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
-        && occupationInput.toLowerCase() === criteria.occupation.toLowerCase())){
-            
-            createTable(criteria)
+
+
+
+    buildTable(results)
+
+}
+
+
+function searchByFirstName(peopleToSearch){
+    firstNameInput = document.forms['nameForm']['fname'].value;
+    filteredFirstName = peopleToSearch.filter(function (name){
+        if(firstNameInput.toLowerCase() === name.firstName.toLowerCase()){
+            return true;
         }
-        else if(eyeColorInput === "" && (genderInput.toLowerCase() === criteria.gender.toLowerCase()
-             && occupationInput.toLowerCase() === criteria.occupation.toLowerCase())){
-                
-                createTable(criteria)
+    })
+    return filteredFirstName;
+}
+
+function searchByLastName(peopleToSearch){
+    lastNameInput = document.forms['nameForm']['lname'].value;
+    filteredLastName = peopleToSearch.filter(function (name){
+        if(lastNameInput.toLowerCase() === name.lastName.toLowerCase()){
+            return true;
         }
-        else if(occupationInput === "" && (eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
-        && genderInput.toLowerCase() === criteria.gender.toLowerCase())){
-            
-            createTable(criteria)
-        }
-        else if(eyeColorInput.toLowerCase() === criteria.eyeColor.toLowerCase() 
-            && genderInput.toLowerCase() === criteria.gender.toLowerCase()
-             && occupationInput.toLowerCase() === criteria.occupation.toLowerCase()){
-                
-                createTable(criteria)
-        }
-    });
+    })
+    return filteredLastName;
 }
 
 // Gender button
-function searchByGender(){
+function searchByGender(peopleToSearch){
     genderInput = document.forms['nameForm']['gender'].value;
-    filteredGender = people.filter(function (maleOrFemale){
+    filteredGender = peopleToSearch.filter(function (maleOrFemale){
         if(genderInput.toLowerCase() === maleOrFemale.gender.toLowerCase()){
-            createTable(maleOrFemale)
+            return true
         }
     })
+    return filteredGender
 }
 
 // Eye color button
-function searchByEyeColor(){
+function searchByEyeColor(peopleToSearch){
     eyeColorInput = document.forms['nameForm']['eyeColor'].value;
-    filteredEyeColor = people.filter(function (eyeColors){
+    filteredEyeColor = peopleToSearch.filter(function (eyeColors){
         if(eyeColors.eyeColor.toLowerCase() === eyeColorInput.toLowerCase()){
-            createTable(eyeColors)
+           return true;
         }
     })
+    return filteredEyeColor;
 }
 
 // Occupation button
-function searchByOccupation(){
+function searchByOccupation(peopleToSearch){
     occupationInput = document.forms['nameForm']['occupation'].value;
-    filteredOccupation = people.filter(function (job){
+    filteredOccupation = peopleToSearch.filter(function (job){
         if(job.occupation.toLowerCase() === occupationInput.toLowerCase()){
-            createTable(job)
+            return true;
         }
     })
+    return filteredOccupation;
 }
 
 // Search by decendants button
-function searchByChildren(){
+function searchByChildren(personToSearch){
+    console.log(personToSearch)
     let grand;
-    lastNameInput = document.forms['nameForm']['lname'].value;
-    personObject = create()
+    let descendants = [];
     let tempPerson;
     people.map(function(el) { 
-        if ((lastNameInput.toLowerCase() === el.lastName.toLowerCase()  && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)
-        || (lastNameInput.toLowerCase() !== el.lastName.toLowerCase() && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)){
-            createTable(el)
-            tempPerson = el;
-            grand = findGrandChildren(tempPerson); // Uses helper function findGrandChildren(...)
+        if ( el.parents[0] === personToSearch|| el.parents[1] === personToSearch){
+            descendants.push(el)
+            descendants = findGrandChildren(el, descendants); // Uses helper function findGrandChildren(...)
             
         }
-        else if(grand !== undefined){
-            createTable(el)
-        }
     });
+    buildTable(descendants)
 }
 
 // Search by family button
-function searchFamily(){
+function searchByFamily(personToSearch){
     // let currentPerson = searchByName();
+    let family =[];
     let grand;
     lastNameInput = document.forms['nameForm']['lname'].value;
-    personObject = create()
     let tempPerson;
     people.map(function(el) { 
-         if ((lastNameInput.toLowerCase() === el.lastName.toLowerCase()  && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)
-         || (lastNameInput.toLowerCase() !== el.lastName.toLowerCase() && el.parents[0] === personObject.id|| el.parents[1] === personObject.id)){
-             createTable(el)
-             tempPerson = el;
-             grand = findGrandChildren(tempPerson); // Uses helper function findGrandChildren(...)
+         if ((lastNameInput.toLowerCase() === el.lastName.toLowerCase() || el.parents.includes(personToSearch))){
+             family.push(el)
+             family = findGrandChildren(el, family); // Uses helper function findGrandChildren(...)
          }
          else if(grand !== undefined){
-            //  do nothing...
+            console.log("we working");
          }
     });
+    buildTable(family)
 }
+
+let id = searchByFamily(el.id)
 
 // Creates the person object to be referenced against.
 function create(){
@@ -202,15 +173,23 @@ function create(){
 }
 
 // Helper function for searchByChildren
-function findGrandChildren(el){
+function findGrandChildren(el, descendants){
     let parent = el
-    let grandChild;
     people.filter(function (children){
         if(children.parents[0] === parent.id || children.parents[1] === parent.id){
-            grandChild = children;
+          grand = descendants.push(children)
         }
     })
-    return grandChild;
+    return descendants;
+}
+
+//View all button builds table in bottom function
+function buildTable(peopleToPopulate){
+    let Table = document.getElementById("mostWanted");
+    Table.innerHTML = "";
+    peopleToPopulate.map(function(el){
+        createTable(el)
+    })
 }
 
 
@@ -227,6 +206,7 @@ function createTable(el){
         <td>${el.occupation}</td>
         <td>${el.parents}</td>
         <td>${el.currentSpouse}</td>
+        <td><button onclick="searchByChildren(${el.id})">Display Descendants</button></td>
         </tr>`
 
 }
