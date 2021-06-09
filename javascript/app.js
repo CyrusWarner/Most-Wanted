@@ -219,6 +219,10 @@ function createTable(el){
         <th>Current Spouse</th>
         </tr>`
         document.getElementById("mostWanted").innerHTML += `<tr>
+        <td><button onclick="searchByChildren(${el.id})">Display Descendants</button></td>
+        <td><button onclick="searchByFamily(${el.id}, ${el.currentSpouse},'${el.firstName}', '${el.lastName}')">
+        Display Family
+        </button></td>
         <td>${el.id}</td>
         <td>${el.firstName}</td>
         <td>${el.lastName}</td>
@@ -230,10 +234,6 @@ function createTable(el){
         <td>${el.occupation}</td>
         <td>${el.parents}</td>
         <td>${el.currentSpouse}</td>
-        <td><button onclick="searchByChildren(${el.id})">Display Descendants</button></td>
-        <td><button onclick="searchByFamily(${el.id}, ${el.currentSpouse},'${el.firstName}', '${el.lastName}')">
-        Display Family
-        </button></td>
         </tr>`
 
 }
