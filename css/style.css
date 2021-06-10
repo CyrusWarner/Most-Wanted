@@ -1,12 +1,12 @@
 body {
-    background-color: #1F1F1D;
+    background-color: #523D2E;
 }
 
 form {
     color: whitesmoke;
     display: grid;
     vertical-align: baseline;
-    background-color: #1F1F1D;
+    background-color: #B4A186;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1rem;
     margin: 0rem 0rem 0rem 0rem;
@@ -43,22 +43,22 @@ thead {
 }
 
 .header {
-    color: charcoal;
+    color: black;
     padding: 16rem 2rem 0rem 0rem;
     font-size: xxx-large;
 }
 
 .bg-header {
     /* Photo by cottonbro from Pexels */
-    background-image: url(../images/cigar.gif);
+    background-image: url(../images/bg.jpeg);
 }
 
 .bg-right {
-    background-image: url(../images/thinking.jpg);
+    background-image: url(../images/searching.jpeg);
 }
 
 .buttons {
-    display: contents;
+    display: flex;
 }
 
 .info {
@@ -74,34 +74,49 @@ thead {
     flex-flow: row wrap;
     font-weight: bold;
     text-align: center; 
-    background: #1F1F1D;
+    background: #523D2E; 
     font-size: medium;
 }
 
 .main {
     padding: 0rem 1rem 0rem 0rem; 
     text-align: -webkit-center;
-    background: #84847C;
+    background: #8F9097; 
     line-height: 2.25rem;
 }
 
 .aside-1 {
-    background: #84847C;
+    background: #8F9097;
     margin: inherit;
-    padding: 0rem 1rem 0rem 0rem;
+    padding: 0rem 0rem 0rem 0rem;
 }
 
 .aside-2 {
-    background: #84847C;
+    background: #8F9097;
     align-content: center;
 }
 
 .modal-color {
-    background-color: #84847C;
+    background-color: #8F9097;
+}
+
+/* .links {
+    padding: 1rem 1rem 1rem 1rem;
+} */
+
+.top-button {
+    padding: 1rem 1rem 1rem 1rem;
 }
 
 @media all and (min-width: 600px) {
-    .aside { flex: 1 0 0; }
+    .aside { 
+        flex: 1 1 1; 
+    }
+    .header {
+        color: black;
+        display: contents;
+        font-size: x-large;
+    }
 }
 
 @media all and (min-width: 800px) {
@@ -114,7 +129,7 @@ thead {
 
 
 #bg-peek {
-    height: 500px;
+    height: 45rem;
     width: initial;
     -webkit-background-size: 100% auto;
     -moz-background-size: 100% auto;
@@ -124,21 +139,28 @@ thead {
     -webkit-box-shadow: rgba(0,0,0,0.20) 0 10px 10px;
     -moz-box-shadow: rgba(0,0,0,0.20) 0 10px 10px;
     box-shadow: rgba(0,0,0,0.20) 0 10px 10px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;          /* Firefox */
+    image-rendering: -o-crisp-edges;            /* Opera */
+    image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming)*/
+    -ms-interpolation-mode: nearest-neighbor;   /* IE (non-standard property) */
 }
 
-#bg-book {
-    height: 25rem;
+#bg-thinking {
+    height: 40rem;
     width: initial;
-    padding: 4rem 2rem 2rem 2rem;
-    margin: 2rem 1rem 2rem 1rem;
-    -webkit-background-size: 75% auto;
-    -moz-background-size: 75% auto;
-    background-size: 75% auto;
+    -webkit-background-size: 100% auto;
+    -moz-background-size: 100% auto;
+    background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center center;
-    /* -webkit-box-shadow: rgba(0,0,0,0.20) 0 10px 10px;
-    -moz-box-shadow: rgba(0,0,0,0.20) 0 10px 10px;
-    box-shadow: rgba(0,0,0,0.20) 0 10px 10px; */
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;          /* Firefox */
+    image-rendering: -o-crisp-edges;            /* Opera */
+    image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming)*/
+    -ms-interpolation-mode: nearest-neighbor;   /* IE (non-standard property) */
 }
 
 #table-header {
