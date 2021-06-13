@@ -1,1 +1,2 @@
 # Most-Wanted
+A basic app to search for people within a data set. This is a single page app created by two people: Cyrus Warner and Brandon Calderon-Morales. It uses basic HTML, CSS, JavaScript, and some W3 Schools styling. This project allowed Cyrus and me to work as a team on a project. We used Zoom calls and Slack messaging to communicate any changes to the end result before pushing anything. Overall, this was a great, team build experience!  
