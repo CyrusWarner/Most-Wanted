@@ -111,28 +111,6 @@
 * ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 * ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 
-<!-- GETTING STARTED -->
-## Getting Started
-
-To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-1. You'll need the latest version of NPM and Visual Studio Code downloaded on your device. (as of September 2021).
-
-### Installation
-
-1. Clone the repo
-
-   `git clone https://github.com/CyrusWarner/Most-Wanted.git`
-
-2. Install NPM packages
-   
-   `npm i`
-
-3. Open up terminal in VS Code.
-4. `npm start`
-5. Enjoy!
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -175,9 +153,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 Cyrus Warner - [Cyrus Warner](https://www.linkedin.com/in/cyrus-warner)  - cyruswarner27@gmail.com
 <br/>
 Brandon Calderon-Morales - [@BrandonACalder1](https://twitter.com/BrandonACalder1) - bacm640@gmail.com
-
-Frontend: [YouTube Clone Frontend](https://github.com/CyrusWarner/Most-Wanted)
-
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
