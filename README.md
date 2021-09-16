@@ -85,6 +85,8 @@
 ## About The Project
 <!-- Insert image snippet of project -->
 
+![image](https://user-images.githubusercontent.com/62074841/133553442-57c9e4c3-9c05-452b-8dcb-d42f551ce189.png)
+
 <p>
  This project was built by two people, Cyrus Warner and Brandon Calderon, during our time at DevCodeCamp. This was one the one time 
  that Cyrus and me got to work together on a project. It was a great experience pair-programming overall, and if we worked on another 
