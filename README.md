@@ -116,7 +116,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-1. You'll need the latest version of NPM, PyCharm, Pip, and Visual Studio Code downloaded on your device. (as of September 2021).
+1. You'll need the latest version of NPM and Visual Studio Code downloaded on your device. (as of September 2021).
 
 ### Installation
 
